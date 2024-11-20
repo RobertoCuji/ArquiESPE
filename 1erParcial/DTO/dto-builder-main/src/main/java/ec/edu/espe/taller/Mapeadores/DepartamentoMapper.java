@@ -1,7 +1,7 @@
 package ec.edu.espe.taller.Mapeadores;
 
 import ec.edu.espe.taller.dto.DepartamentoDTO;
-import ec.edu.espe.taller.entidades.Departamento;
+import ec.edu.espe.taller.entities.Departamento;
 
 public class DepartamentoMapper {
 

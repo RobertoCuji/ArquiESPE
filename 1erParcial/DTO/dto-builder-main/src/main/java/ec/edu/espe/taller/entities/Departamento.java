@@ -1,4 +1,4 @@
-package ec.edu.espe.taller.entidades;
+package ec.edu.espe.taller.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

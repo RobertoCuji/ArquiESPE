@@ -1,9 +1,10 @@
-package ec.edu.espe.taller.Servicios;
+package ec.edu.espe.taller.services;
 
 import ec.edu.espe.taller.Mapeadores.DepartamentoMapper;
 import ec.edu.espe.taller.dto.DepartamentoDTO;
-import ec.edu.espe.taller.entidades.Departamento;
-import ec.edu.espe.taller.repositorios.DepartamentoRepository;
+import ec.edu.espe.taller.entities.Departamento;
+import ec.edu.espe.taller.repositories.DepartamentoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package ec.edu.espe.taller.Mapeadores;
 
 import ec.edu.espe.taller.dto.EmpleadoDTO;
-import ec.edu.espe.taller.entidades.Empleado;
+import ec.edu.espe.taller.entities.Empleado;
 
 public class EmpleadoMapper {
 

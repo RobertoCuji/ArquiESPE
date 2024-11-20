@@ -1,8 +1,9 @@
-package ec.edu.espe.taller.repositorios;
+package ec.edu.espe.taller.repositories;
 
-import ec.edu.espe.taller.entidades.Departamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import ec.edu.espe.taller.entities.Departamento;
 
 @Repository
 public interface DepartamentoRepository extends JpaRepository<Departamento, Long> {

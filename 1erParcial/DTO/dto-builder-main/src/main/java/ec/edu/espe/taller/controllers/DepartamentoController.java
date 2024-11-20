@@ -1,7 +1,8 @@
-package ec.edu.espe.taller.Controladores;
+package ec.edu.espe.taller.controllers;
 
-import ec.edu.espe.taller.Servicios.DepartamentoService;
 import ec.edu.espe.taller.dto.DepartamentoDTO;
+import ec.edu.espe.taller.services.DepartamentoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
