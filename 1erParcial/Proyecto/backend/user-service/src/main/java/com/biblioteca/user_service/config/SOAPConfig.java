@@ -14,6 +14,7 @@ import org.springframework.xml.xsd.XsdSchema;
 @Configuration
 public class SOAPConfig {
 
+    @SuppressWarnings("null")
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet() {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
