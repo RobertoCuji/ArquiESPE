@@ -1,5 +1,5 @@
 # Usa una imagen base de OpenJDK para Java
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 
 # Configura un directorio de trabajo
 WORKDIR /app

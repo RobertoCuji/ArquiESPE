@@ -15,23 +15,26 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    // Obtener todos los libros
     public List<BookDto> getAllBooks() {
         return bookRepository.findAll().stream()
-                .map(book -> new BookDto(book.getId(), book.getTitle(), book.getAuthor(), book.getCategory(), book.isAvailable()))
+                .map(BookDto::fromEntity)
                 .collect(Collectors.toList());
     }
 
+    // Agregar un libro
     public BookDto addBook(BookDto bookDto) {
-        Book book = Book.builder()
-                .title(bookDto.getTitle())
-                .author(bookDto.getAuthor())
-                .category(bookDto.getCategory())
-                .available(bookDto.isAvailable())
-                .build();
+        // Convertir BookDto a entidad Book
+        Book book = BookDto.toEntity(bookDto);
+
+        // Guardar en la base de datos
         Book savedBook = bookRepository.save(book);
-        return new BookDto(savedBook.getId(), savedBook.getTitle(), savedBook.getAuthor(), savedBook.getCategory(), savedBook.isAvailable());
+
+        // Convertir Book a BookDto para la respuesta
+        return BookDto.fromEntity(savedBook);
     }
 
+    // Verificar disponibilidad de un libro por título
     public boolean isBookAvailable(String title) {
         Book book = bookRepository.findByTitle(title);
         return book != null && book.isAvailable();

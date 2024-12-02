@@ -1,86 +1,18 @@
-version: "3.8"
+version: '3.8'
+
 services:
   api-gateway:
     build:
-      context: ./api-gateway
+      context: . # Contexto actual, donde se encuentra el Dockerfile
       dockerfile: Dockerfile
+    container_name: api-gateway
     ports:
-      - "8080:8080"
-    depends_on:
-      - user-service
-      - book-service
-      - loan-service
-      - reservation-service
-    networks:
-      - biblioteca-network
-
-  user-service:
-    build:
-      context: ./user-service
-      dockerfile: Dockerfile
-    ports:
-      - "8081:8081"
-    networks:
-      - biblioteca-network
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/user_service
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-
-  book-service:
-    build:
-      context: ./book-service
-      dockerfile: Dockerfile
-    ports:
-      - "8082:8082"
-    networks:
-      - biblioteca-network
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/book_service
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-
-  loan-service:
-    build:
-      context: ./loan-service
-      dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
-    networks:
-      - biblioteca-network
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/loan_service
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-
-  reservation-service:
-    build:
-      context: ./reservation-service
-      dockerfile: Dockerfile
-    ports:
-      - "8084:8084"
-    networks:
-      - biblioteca-network
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/reservation_service
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-
-  db:
-    image: postgres:15
-    container_name: biblioteca_db
-    ports:
-      - "5432:5432"
-    networks:
-      - biblioteca-network
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - "8080:8080" # Mapea el puerto 8080 del host al puerto 8080 del contenedor
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro # Monta el archivo de configuración nginx.conf en el contenedor
+    networks:
+      - biblioteca-network # Red compartida con los microservicios
 
 networks:
   biblioteca-network:
-
-volumes:
-  postgres-data:
+    external: true # Asegúrate de que la red ya exista o crea una global en el docker-compose principal
