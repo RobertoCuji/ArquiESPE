@@ -1,0 +1,117 @@
+Configuración para Postman con URLs separadas para cada operación
+
+1. Registrar Préstamo
+======================
+Method: POST
+URL: http://localhost:8000/registerLoan
+Headers:
+- Content-Type: text/xml
+- SOAPAction: registerLoan
+
+Body (raw):
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lib="http://www.example.org/library">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lib:registerLoan>
+         <userId>1</userId>
+         <bookId>2</bookId>
+         <loanDate>2024-12-01</loanDate>
+         <dueDate>2024-12-15</dueDate>
+      </lib:registerLoan>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+2. Registrar Devolución
+========================
+Method: POST
+URL: http://localhost:8000/returnLoan
+Headers:
+- Content-Type: text/xml
+- SOAPAction: returnLoan
+
+Body (raw):
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lib="http://www.example.org/library">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lib:returnLoan>
+         <loanId>1</loanId>
+      </lib:returnLoan>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+3. Generar Reporte de Préstamos Activos
+========================================
+Method: POST
+URL: http://localhost:8000/getActiveLoans
+Headers:
+- Content-Type: text/xml
+- SOAPAction: getActiveLoans
+
+Body (raw):
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lib="http://www.example.org/library">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lib:getActiveLoans>
+         <startDate>2024-12-01</startDate>
+         <endDate>2024-12-15</endDate>
+      </lib:getActiveLoans>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+4. Generar Reporte de Historial de Usuarios
+============================================
+Method: POST
+URL: http://localhost:8000/getUserHistory
+Headers:
+- Content-Type: text/xml
+- SOAPAction: getUserHistory
+
+Body (raw):
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lib="http://www.example.org/library">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lib:getUserHistory>
+         <userId>1</userId>
+      </lib:getUserHistory>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+5. Registrar Usuario
+=====================
+Method: POST
+URL: http://localhost:8000/registerUser
+Headers:
+- Content-Type: text/xml
+- SOAPAction: registerUser
+
+Body (raw):
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lib="http://www.example.org/library">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lib:registerUser>
+         <username>usuario6</username>
+         <idInstitucional>ID654321</idInstitucional>
+         <password>password123</password>
+         <role>1</role>
+         <status>true</status>
+      </lib:registerUser>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+6. Suspender Usuario
+=====================
+Method: POST
+URL: http://localhost:8000/suspendUser
+Headers:
+- Content-Type: text/xml
+- SOAPAction: suspendUser
+
+Body (raw):
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lib="http://www.example.org/library">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lib:suspendUser>
+         <userId>1</userId>
+      </lib:suspendUser>
+   </soapenv:Body>
+</soapenv:Envelope>
