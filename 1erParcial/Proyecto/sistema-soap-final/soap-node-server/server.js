@@ -47,11 +47,7 @@ const service = {
           callback(null, { loanId: result.rows[0].id, status: 'Préstamo registrado exitosamente' });
         } catch (err) {
           console.error('Error en registrar préstamo:', err);
-          if (err.code === '23505') {
-            callback({ Fault: { faultstring: 'El préstamo ya existe' } });
-          } else {
-            callback({ Fault: { faultstring: 'Error al registrar el préstamo' } });
-          }
+          callback({ Fault: { faultstring: 'Error al registrar el préstamo' } });
         }
       },
 
@@ -111,14 +107,56 @@ const service = {
           callback({ Fault: { faultstring: 'Error al obtener el historial del usuario' } });
         }
       },
+
+      // Registro de Usuario
+      registerUser: async (args, callback) => {
+        const { username, idInstitucional, password, role, status } = args;
+        try {
+          const client = await pool.connect();
+          const result = await client.query(
+            'INSERT INTO users (username, id_institucional, password, role, status) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+            [username, idInstitucional, password, role, status]
+          );
+          callback(null, { userId: result.rows[0].id, status: 'Usuario registrado exitosamente' });
+        } catch (err) {
+          console.error('Error al registrar usuario:', err);
+          callback({ Fault: { faultstring: 'Error al registrar el usuario' } });
+        }
+      },
+
+      // Suspender Usuario
+      suspendUser: async (args, callback) => {
+        const { userId } = args;
+        try {
+          const client = await pool.connect();
+          const result = await client.query(
+            'UPDATE users SET status = false WHERE id = $1 RETURNING id',
+            [userId]
+          );
+          if (result.rows.length === 0) {
+            callback({ Fault: { faultstring: 'Usuario no encontrado' } });
+          } else {
+            callback(null, { status: 'Usuario suspendido exitosamente' });
+          }
+        } catch (err) {
+          console.error('Error al suspender usuario:', err);
+          callback({ Fault: { faultstring: 'Error al suspender el usuario' } });
+        }
+      },
     },
   },
 };
 
 const xml = fs.readFileSync(path.join(__dirname, 'library-service.wsdl'), 'utf8');
 
+// Configurar diferentes URLs para cada operación
 app.listen(8000, () => {
-  soap.listen(app, '/library', service, xml, () => {
-    console.log('SOAP service listening on port 8000');
-  });
+  soap.listen(app, '/registerLoan', { LibraryService: { LibraryServicePort: { registerLoan: service.LibraryService.LibraryServicePort.registerLoan } } }, xml);
+  soap.listen(app, '/returnLoan', { LibraryService: { LibraryServicePort: { returnLoan: service.LibraryService.LibraryServicePort.returnLoan } } }, xml);
+  soap.listen(app, '/getActiveLoans', { LibraryService: { LibraryServicePort: { getActiveLoans: service.LibraryService.LibraryServicePort.getActiveLoans } } }, xml);
+  soap.listen(app, '/getUserHistory', { LibraryService: { LibraryServicePort: { getUserHistory: service.LibraryService.LibraryServicePort.getUserHistory } } }, xml);
+  soap.listen(app, '/registerUser', { LibraryService: { LibraryServicePort: { registerUser: service.LibraryService.LibraryServicePort.registerUser } } }, xml);
+  soap.listen(app, '/suspendUser', { LibraryService: { LibraryServicePort: { suspendUser: service.LibraryService.LibraryServicePort.suspendUser } } }, xml);
+
+  console.log('SOAP services listening on multiple endpoints');
 });

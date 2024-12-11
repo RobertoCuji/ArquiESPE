@@ -76,6 +76,43 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+
+            <!-- Registrar Usuario -->
+            <xsd:element name="registerUser">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="username" type="xsd:string"/>
+                        <xsd:element name="idInstitucional" type="xsd:string"/>
+                        <xsd:element name="password" type="xsd:string"/>
+                        <xsd:element name="role" type="xsd:int"/>
+                        <xsd:element name="status" type="xsd:boolean"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="registerUserResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:int"/>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Suspender Usuario -->
+            <xsd:element name="suspendUser">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="suspendUserResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
         </xsd:schema>
     </types>
 
@@ -103,6 +140,18 @@
     <message name="getUserHistoryResponse">
         <part name="parameters" element="tns:getUserHistoryResponse"/>
     </message>
+    <message name="registerUserRequest">
+        <part name="parameters" element="tns:registerUser"/>
+    </message>
+    <message name="registerUserResponse">
+        <part name="parameters" element="tns:registerUserResponse"/>
+    </message>
+    <message name="suspendUserRequest">
+        <part name="parameters" element="tns:suspendUser"/>
+    </message>
+    <message name="suspendUserResponse">
+        <part name="parameters" element="tns:suspendUserResponse"/>
+    </message>
 
     <portType name="LibraryServicePortType">
         <operation name="registerLoan">
@@ -120,6 +169,14 @@
         <operation name="getUserHistory">
             <input message="tns:getUserHistoryRequest"/>
             <output message="tns:getUserHistoryResponse"/>
+        </operation>
+        <operation name="registerUser">
+            <input message="tns:registerUserRequest"/>
+            <output message="tns:registerUserResponse"/>
+        </operation>
+        <operation name="suspendUser">
+            <input message="tns:suspendUserRequest"/>
+            <output message="tns:suspendUserResponse"/>
         </operation>
     </portType>
 
@@ -154,6 +211,24 @@
         </operation>
         <operation name="getUserHistory">
             <soap:operation soapAction="getUserHistory"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="registerUser">
+            <soap:operation soapAction="registerUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="suspendUser">
+            <soap:operation soapAction="suspendUser"/>
             <input>
                 <soap:body use="literal"/>
             </input>
