@@ -1,0 +1,22 @@
+# Configuración básica del API Gateway
+spring.application.name=api-gateway
+server.port=8989
+server.shutdown=graceful
+
+# Habilitar el descubrimiento de servicios a través de Eureka
+spring.cloud.gateway.discovery.locator.enabled=true
+
+# Configuración de CORS para permitir accesos desde el frontend
+spring.cloud.gateway.globalcors.cors-configurations["[/**]"].allowed-origins=http://localhost:3000
+spring.cloud.gateway.globalcors.cors-configurations["[/**]"].allowed-methods=GET,POST,PUT,DELETE,OPTIONS
+spring.cloud.gateway.globalcors.cors-configurations["[/**]"].allowed-headers=*
+spring.cloud.gateway.globalcors.cors-configurations["[/**]"].allow-credentials=true
+
+# Configuración para conectar con el servidor Eureka
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=true
+
+# Configuración de Actuator para monitoreo
+management.endpoints.web.exposure.include=*
+management.metrics.tags.application=${spring.application.name}
