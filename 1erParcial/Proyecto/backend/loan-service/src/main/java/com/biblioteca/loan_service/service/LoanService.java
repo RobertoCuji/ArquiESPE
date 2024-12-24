@@ -16,6 +16,16 @@ public class LoanService {
     @Autowired
     private LoanRepository loanRepository;
 
+    public List<LoanDto> getAllLoans() {
+        return loanRepository.findAll().stream()
+                .map(loan -> new LoanDto(loan.getId(), loan.getUserId(), loan.getBookId(),
+                        loan.getLoanDate(), loan.getDueDate(), loan.isReturned()))
+                .collect(Collectors.toList());
+    }
+    
+
+
+
     public List<LoanDto> getActiveLoans(Long userId) {
         return loanRepository.findByUserIdAndReturnedFalse(userId).stream()
                 .map(loan -> new LoanDto(loan.getId(), loan.getUserId(), loan.getBookId(),
