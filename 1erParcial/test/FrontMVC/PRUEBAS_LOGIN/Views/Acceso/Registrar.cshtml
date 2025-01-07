@@ -30,12 +30,12 @@
                 <div class="d-flex justify-content-center form_container">
                     <form action="@Url.Action("Registrar", "Acceso")" method="post">
                         <!-- Campo Username -->
-                        <!--<div class="input-group mb-3">
+                        <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
                             <input type="text" name="Username" class="form-control input_user" placeholder="Username" required>
-                        </div>-->
+                        </div>
 
                         <!-- Campo Email -->
                         <div class="input-group mb-3">
@@ -62,7 +62,7 @@
                         </div>
 
                         <!-- Campo Role -->
-                        <!--<div class="input-group mb-3">
+                        <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                             </div>
@@ -73,25 +73,25 @@
                                 <option value="Estudiante">Estudiante</option>
                                 <option value="Profesor">Profesor</option>
                             </select>
-                        </div>-->
+                        </div>
 
                         <!-- Checkbox para Activo -->
-                        @*<div class="form-group mb-3">
+                        <div class="form-group mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="Status" value="true" id="statusCheckbox">
                                 <label class="form-check-label" for="statusCheckbox">
                                     Activo
                                 </label>
                             </div>
-                        </div>*@
+                        </div>
 
                         <!-- Campo Id Institucional -->
-                        @*<div class="input-group mb-3">
+                        <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                             </div>
                             <input type="text" name="Id_Institucional" class="form-control input_user" placeholder="ID Institucional" required>
-                        </div>*@
+                        </div>
 
                         <!-- Mensaje de Error -->
                         @if (ViewData["Mensaje"] != null)

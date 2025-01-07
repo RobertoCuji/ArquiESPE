@@ -1,0 +1,50 @@
+﻿@model PRUEBAS_LOGIN.Models.Notifications
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Notifications</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sent_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sent_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.read_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.read_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
