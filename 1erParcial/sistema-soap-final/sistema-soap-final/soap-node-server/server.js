@@ -1,4 +1,3 @@
-
 // server.js
 
 const express = require('express');
@@ -15,7 +14,7 @@ app.use(bodyParser.json());
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'library',
+  database: 'Library',
   password: 'admin1234',
   port: 5432,
 });
